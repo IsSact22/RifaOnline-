@@ -15,12 +15,12 @@ if (!ctype_digit($cedula)) {
     exit();
 }
 
-// Verificar si se han seleccionado más de 2 números
-if (count($numeros) > 2) {
-    // Redirigir con mensaje de error
-    header("Location: formulario.php?error=exceed_limit");
-    exit();
-}
+// // Verificar si se han seleccionado más de 2 números
+// if (count($numeros) > 2) {
+//     // Redirigir con mensaje de error
+//     header("Location: formulario.php?error=exceed_limit");
+//     exit();
+// }
 
 
 // Verificar si se han seleccionado al menos un número

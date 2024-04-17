@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- formulario.php -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -16,15 +17,6 @@
     <img src="img/Banner2015_2.jpg  " alt="Banner" class="full-width-img">
         <h2 class="custom-title">Sorteo de Números</h2>
         <br>
-            <!-- <ul>
-                <li><strong>Llenar Todos los Datos Requeridos:</strong> Es obligatorio completar todos los campos del formulario de registro con la información solicitada. Esto incluye nombre, apellido y cédula.</li>
-                <li><strong>Selección de Número por Registro:</strong> Cada participante debe seleccionar al menos un número disponible de la tabla de números. Un registro no será válido si no se elige al menos un número.</li>
-                <li><strong>Un Número por Participante:</strong> Cada participante puede seleccionar un máximo de un número por registro. Se desactivará la opción de seleccionar más de un número.</li>
-                <li><strong>Cumplimiento de Normas:</strong> Todos los participantes deben cumplir con las normas y regulaciones establecidas para la rifa. El incumplimiento de estas normas puede resultar en la descalificación del participante.</li>
-                <li><strong>Participación Voluntaria:</strong> La participación en la rifa es voluntaria y no está sujeta a ningún tipo de obligación.</li>
-                <li><strong>Resultados Finales:</strong> Los resultados finales de la rifa se determinarán de acuerdo con el método especificado por los organizadores. Estos resultados serán definitivos y no estarán sujetos a revisión.</li>
-                <li><strong>Premios:</strong> Los premios ofrecidos en la rifa estarán sujetos a disponibilidad y podrán variar según la cantidad de participantes y otras condiciones.</li>
-            </ul> -->
             <p class="custom-P">Bienvenidos al gran sorteo CAPRESTSJ</p>
             <p class="custom-P">Al participar en la rifa, aceptas cumplir con todas estas reglas y condiciones. ¡Buena suerte!</p>
         </p>
@@ -76,31 +68,31 @@
                 $numeros_pagina = array_slice($numeros_disponibles, $startIndex, $numbersPerPage);
                 ?>
                 <table>
-                    <tr>
-                    <?php
-                        $counter = 0; // Inicializamos la variable $counter
-                        foreach ($numeros_pagina as $numero) {
-                            $sql_check = "SELECT * FROM participantes WHERE numero = '$numero'";
-                            $result_check = $conn->query($sql_check);
-                            if ($result_check->num_rows > 0) {
-                                // Si el número está ocupado, marcarlo como ocupado en la tabla
-                                echo "<td class='ocupado'>$numero</td>";
-                            } else {
-                                // Verificar si el número está seleccionado por el participante actual
-                                $checked = in_array($numero, $_POST['numeros'] ?? array());
-                                // Marcar el checkbox como seleccionado y deshabilitado si es necesario
-                                $checked_attr = $checked ? "checked disabled" : "";
-                                
-                                echo "<td><input type='checkbox' name='numeros[]' value='$numero' $checked_attr>$numero</td>";
-                            }
-                            // Si el contador es divisible por 10, cierra la fila y comienza una nueva
-                            if (($counter + 1) % 10 == 0) {
-                                echo "</tr><tr>";
-                            }
-                            $counter++;
-                        }
-                    ?>
-                    </tr>
+                        <tr>
+                            <?php
+                                $counter = 0; // Inicializamos la variable $counter
+                                foreach ($numeros_pagina as $numero) {
+                                    $sql_check = "SELECT * FROM participantes WHERE FIND_IN_SET('$numero', numero)";
+                                    $result_check = $conn->query($sql_check);
+                                    if ($result_check->num_rows > 0) {
+                                        // Si el número está ocupado, marcarlo como ocupado en la tabla
+                                        echo "<td class='ocupado'>$numero</td>";
+                                    } else {
+                                        // Verificar si el número está seleccionado por el participante actual
+                                        $checked = in_array($numero, $_POST['numeros'] ?? array());
+                                        // Marcar el checkbox como seleccionado y deshabilitado si es necesario
+                                        $checked_attr = $checked ? "checked disabled" : "";
+                                        
+                                        echo "<td><input type='checkbox' name='numeros[]' value='$numero' $checked_attr>$numero</td>";
+                                    }
+                                    // Si el contador es divisible por 10, cierra la fila y comienza una nueva
+                                    if (($counter + 1) % 10 == 0) {
+                                        echo "</tr><tr>";
+                                    }
+                                    $counter++;
+                                }
+                            ?>
+                        </tr>
                 </table>
 
                 <!-- Controles de paginación -->
