@@ -51,76 +51,83 @@
             
                 <p><a href="mostrar_participantes.php">Ver participantes registrados</a></p>
                 <hr>
-                <?php
-                // Obtener el número de página actual
-                $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
-                // Número de números por página
-                $numbersPerPage = 70;
-                // Calcular el índice de inicio para esta página
-                $startIndex = ($currentPage - 1) * $numbersPerPage;
-                // Generar números disponibles con tres dígitos
-                $numeros_disponibles = range(0, 999);
-                // Formatear los números para que tengan tres dígitos
-                $numeros_disponibles = array_map(function($num) {
-                    return str_pad($num, 3, '0', STR_PAD_LEFT);
-                }, $numeros_disponibles);
-                // Filtrar los números para mostrar solo los de esta página
-                $numeros_pagina = array_slice($numeros_disponibles, $startIndex, $numbersPerPage);
-                ?>
-                <table>
-                        <tr>
-                            <?php
-                                $counter = 0; // Inicializamos la variable $counter
-                                foreach ($numeros_pagina as $numero) {
-                                    $sql_check = "SELECT * FROM participantes WHERE FIND_IN_SET('$numero', numero)";
-                                    $result_check = $conn->query($sql_check);
-                                    if ($result_check->num_rows > 0) {
-                                        // Si el número está ocupado, marcarlo como ocupado en la tabla
-                                        echo "<td class='ocupado'>$numero</td>";
-                                    } else {
-                                        // Verificar si el número está seleccionado por el participante actual
-                                        $checked = in_array($numero, $_POST['numeros'] ?? array());
-                                        // Marcar el checkbox como seleccionado y deshabilitado si es necesario
-                                        $checked_attr = $checked ? "checked disabled" : "";
-                                        
-                                        echo "<td><input type='checkbox' name='numeros[]' value='$numero' $checked_attr>$numero</td>";
-                                    }
-                                    // Si el contador es divisible por 10, cierra la fila y comienza una nueva
-                                    if (($counter + 1) % 10 == 0) {
-                                        echo "</tr><tr>";
-                                    }
-                                    $counter++;
-                                }
-                            ?>
-                        </tr>
-                </table>
+                <input type="hidden" name="seleccionados" id="seleccionados" value="<?php echo implode(',', $_POST['numeros'] ?? []); ?>">
 
-                <!-- Controles de paginación -->
-                <?php
-                    // Calcular la cantidad total de páginas
-                    $totalPages = ceil(count($numeros_disponibles) / $numbersPerPage);
-                ?>
-                <nav aria-label="Page navigation">
-                    <ul class="justify-content-center paginacion">
-                        <?php if ($currentPage > 1): ?>
-                            <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $currentPage - 1; ?>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                            <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                        <?php endfor; ?>
-                        <?php if ($currentPage < $totalPages): ?>
-                            <li class="page-item">
-                                <a class="page-link" href="?page=<?php echo $currentPage + 1; ?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </nav>
+                    <div id="tabla-numeros">
+                        <!-- Aquí se cargará dinámicamente la tabla de números -->
+                        <?php
+                        // Obtener el número de página actual
+                        $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
+                        // Número de números por página
+                        $numbersPerPage = 70;
+                        // Calcular el índice de inicio para esta página
+                        $startIndex = ($currentPage - 1) * $numbersPerPage;
+                        // Generar números disponibles con tres dígitos
+                        $numeros_disponibles = range(0, 999);
+                        // Formatear los números para que tengan tres dígitos
+                        $numeros_disponibles = array_map(function($num) {
+                            return str_pad($num, 3, '0', STR_PAD_LEFT);
+                        }, $numeros_disponibles);
+                        // Filtrar los números para mostrar solo los de esta página
+                        $numeros_pagina = array_slice($numeros_disponibles, $startIndex, $numbersPerPage);
+                        ?>
+                        <table>
+                                <tr>
+                                <?php
+                                        $counter = 0; // Inicializamos la variable $counter
+                                        $seleccionados = explode(',', $_POST['seleccionados'] ?? ''); // Obtener los números seleccionados
+                                        foreach ($numeros_pagina as $numero) {
+                                            $sql_check = "SELECT * FROM participantes WHERE FIND_IN_SET('$numero', numero)";
+                                            $result_check = $conn->query($sql_check);
+                                            if ($result_check->num_rows > 0) {
+                                                // Si el número está ocupado, marcarlo como ocupado en la tabla
+                                                echo "<td class='ocupado'>$numero</td>";
+                                            } else {
+                                                // Verificar si el número está seleccionado por el participante actual
+                                                $checked = in_array($numero, $seleccionados);
+                                                // Marcar el checkbox como seleccionado si es necesario
+                                                $checked_attr = $checked ? "checked" : "";
+                                                echo "<td><input type='checkbox' class='checkbox-numero' name='numeros[]' value='$numero' $checked_attr>$numero</td>";
+                                            }
+                                            // Si el contador es divisible por 10, cierra la fila y comienza una nueva
+                                            if (($counter + 1) % 10 == 0) {
+                                                echo "</tr><tr>";
+                                            }
+                                            $counter++;
+                                        }
+                                ?>
+
+                                </tr>
+                        </table>
+                        <!-- Controles de paginación -->
+                        <?php
+                            // Calcular la cantidad total de páginas
+                            $totalPages = ceil(count($numeros_disponibles) / $numbersPerPage);
+                        ?>
+                    </div>
+
+
+                    <nav aria-label="Page navigation">
+                        <ul class="justify-content-center paginacion">
+                            <?php if ($currentPage > 1): ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?php echo $currentPage - 1; ?>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                            <?php endfor; ?>
+                            <!-- <?php if ($currentPage < $totalPages): ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?php echo $currentPage + 1; ?>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?> -->
+                        </ul>
+                    </nav>
 
                 <input type="submit" value="Enviar" class="custom-button">
                 <hr>
@@ -241,7 +248,56 @@
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
+
+
+<script>
+
+$(document).ready(function() {
+    // Leer las selecciones almacenadas en la cookie
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)seleccionados\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    var seleccionados = cookieValue ? cookieValue.split(',') : [];
+
+    // Marcar las casillas de verificación según las selecciones almacenadas
+    seleccionados.forEach(function(numero) {
+        $('input[value="' + numero + '"]').prop('checked', true);
+    });
+});
+
+</script>
+
+<script>
+
+$(document).ready(function() {
+    // Manejar el clic en los enlaces de paginación
+    $(document).on('click', '.page-link', function(e) {
+        e.preventDefault();
+        var page = $(this).attr('href');
+        
+        // Obtener los números seleccionados en la página actual
+        var seleccionados = $('input[name="numeros[]"]:checked').map(function() { return this.value; }).get().join(',');
+        
+        // Realizar una solicitud GET al servidor para obtener el contenido de la siguiente página
+        $.get(page, function(data) {
+            var tablaNumeros = $(data).find('#tabla-numeros').html();
+            
+            // Actualizar el contenido de la tabla en la página actual
+            $('#tabla-numeros').html(tablaNumeros);
+            
+            // Volver a marcar los números seleccionados después de cargar la nueva página
+            seleccionados.split(',').forEach(function(numero) {
+                $('input[value="' + numero + '"]').prop('checked', true);
+            });
+        });
+    });
+    
+    // Guardar el estado de las casillas seleccionadas antes de enviar el formulario
+    $('form').submit(function() {
+        $('#seleccionados').val($('input[name="numeros[]"]:checked').map(function() { return this.value; }).get().join(','));
+    });
+});
+
+</script>
+
 
    
 </body>
