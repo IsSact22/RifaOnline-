@@ -8,17 +8,34 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <title>Rifa</title>
+    <link rel="shortcut icon" href="img/logo_ca.png">
+    <title>Rifa CAPRES-TSJ</title>
     
 </head>
 <body>
     <div class="container">
     <img src="img/Banner2015_2.jpg  " alt="Banner" class="full-width-img">
-        <h2 class="custom-title">Sorteo de Números</h2>
+    <h2 class="custom-title">RIFA DIA DE LAS MADRES</h2>
         <br>
-            <p class="custom-P">Bienvenidos al gran sorteo CAPRESTSJ</p>
-            <p class="custom-P">Al participar en la rifa, aceptas cumplir con todas estas reglas y condiciones. ¡Buena suerte!</p>
+            <p class="custom-P">CAPRESTSJ, te invita participar en el primer sorteo, donde ganarás fabulosos premios:</p>
+            <p class="custom-P">
+               <ul class="custom-P " >
+               • 1er Premio: Un televisor 50” + XXX+XXX <br>
+               • 2do Premio: XXX+XXX+XXX <br>
+               • 3er Premio: XXX + XXX + XXX
+               </ul>
+            </p>
+            <p  class="custom-P "><b>EL SORTEO SE REALIZARÁ EL DÍA 10 DE MAYO DE 2024, POR LA LOTERIA </b></p>
+            <p><b>Condiciones</b> </p>
+            <p>
+                <ul>
+                    • Costo por acción Bs.80 <br>
+                    • Los boletos no cobrados, NO PARTICIPAN. <br>
+                    •Acepta que el monto total de los números adquiridos, sera debitado de su cuenta bancaria del Banco de Venezuela la segunda quincena de abril (30/04/2024). 
+                </ul>
+            </p>
+
+            <p><b>Al participar en la rifa, aceptas cumplir con todas estas reglas y condiciones. ¡Buena suerte!</b></p>
         </p>
     <div class="formulario">
                     <p></p>
@@ -28,26 +45,41 @@
             
             <form action="procesar.php" method="post">
             
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="nombre" class="custom-label" >Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" class="custom-input" required placeholder="ingresa su nombre"> 
+            <div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="nombre" class="custom-label">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="custom-input" required placeholder="Ingrese su nombre">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="apellido" class="custom-label">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" class="custom-input" required placeholder="Ingrese su apellido">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="cedula" class="custom-label">Cédula:</label>
+            <input type="text" id="cedula" name="cedula" class="custom-input" pattern="[0-8]+" title="Ingrese solo números" required placeholder="Ingresar 8 dígitos">
+                <ul class="CLU">
+                    <li class="CLI">
+                        <div class="conts">
+                            <h3>Nota:</h3>
+                            <p>Debera completar esta casilla con 8 digitos, si su cedula es de 7 digitos 
+                            por favor incluir un cero (0) al principio de la cedula </p>
+
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="apellido" class="custom-label" >Apellido:</label>
-                            <input type="text" id="apellido" name="apellido" class="custom-input" required placeholder="ingresa su apellido">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="cedula" class="custom-label" >Cédula:</label>
-                            <input type="text" id="cedula" name="cedula" class="custom-input" pattern="[0-8]+" title="Ingrese solo números" required placeholder="00000000">
-                        </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
             
                 <p><a href="mostrar_participantes.php">Ver participantes registrados</a></p>
                 <hr>
@@ -59,7 +91,7 @@
                         // Obtener el número de página actual
                         $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
                         // Número de números por página
-                        $numbersPerPage = 70;
+                        $numbersPerPage = 100;
                         // Calcular el índice de inicio para esta página
                         $startIndex = ($currentPage - 1) * $numbersPerPage;
                         // Generar números disponibles con tres dígitos
@@ -194,7 +226,10 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap Bundle JS -->
+
+
+
+    <!-- Bootstrap Bundle JS  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Script para mostrar la alerta de registro exitoso o de duplicado -->
@@ -264,9 +299,8 @@ $(document).ready(function() {
 });
 
 </script>
-
+<!-- paginacion y refres de scroll -->
 <script>
-
 $(document).ready(function() {
     // Manejar el clic en los enlaces de paginación
     $(document).on('click', '.page-link', function(e) {
@@ -297,6 +331,7 @@ $(document).ready(function() {
 });
 
 </script>
+
 
 
    

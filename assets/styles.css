@@ -249,3 +249,58 @@ table td input[type="checkbox"] {
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+.CLU .CLI{
+   position: relative;
+   list-style: none;
+   width: 20px;
+   height: 20px;
+   background: #727070;
+   margin: 0 260px; 
+   border-radius: 50%;
+   transition: 0.5s;
+   cursor: pointer;
+}
+.CLU .CLI:hover{
+    background: #0026ff;
+    box-shadow: 0 0 0 4px #ffffff,
+                0 0 0 6px #0026ff;
+
+
+}
+.CLU .CLI .conts{
+    position: absolute;
+    bottom: 55px;
+    width: 400px;
+    background: #fffbfb;
+    border: 2px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+    transform: translateX(-50%) translateY(-50px);
+}
+
+.CLU .CLI .conts::before{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #0362cf;
+    bottom: -15px;
+    left: 194px;
+    transform: rotate(45deg);
+
+
+}
+.CLU .CLI:hover .conts{
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+}
+.CLU .CLI .conts h2{
+    margin: 0;
+    padding: 0;
+}
