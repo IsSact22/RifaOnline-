@@ -301,33 +301,77 @@ $(document).ready(function() {
 </script>
 <!-- paginacion y refres de scroll -->
 <script>
+// Objeto para almacenar las selecciones de casillas por número de página
+var seleccionesPorPagina = {};
+
 $(document).ready(function() {
     // Manejar el clic en los enlaces de paginación
     $(document).on('click', '.page-link', function(e) {
         e.preventDefault();
         var page = $(this).attr('href');
-        
+
         // Obtener los números seleccionados en la página actual
-        var seleccionados = $('input[name="numeros[]"]:checked').map(function() { return this.value; }).get().join(',');
-        
+        var currentPageSelected = getCurrentPageSelection();
+
         // Realizar una solicitud GET al servidor para obtener el contenido de la siguiente página
         $.get(page, function(data) {
             var tablaNumeros = $(data).find('#tabla-numeros').html();
-            
+
             // Actualizar el contenido de la tabla en la página actual
             $('#tabla-numeros').html(tablaNumeros);
-            
+
             // Volver a marcar los números seleccionados después de cargar la nueva página
-            seleccionados.split(',').forEach(function(numero) {
+            currentPageSelected.forEach(function(numero) {
                 $('input[value="' + numero + '"]').prop('checked', true);
             });
         });
     });
-    
+
+    // Manejar el cambio de estado de los checkboxes de números (evento delegado)
+    $(document).on('change', 'input[name="numeros[]"]:checkbox', function() {
+        // Obtener el número de página actual
+        var currentPage = getCurrentPage();
+
+        // Obtener el número seleccionado
+        var numero = $(this).val();
+        var isChecked = $(this).prop('checked');
+
+        // Actualizar el estado del checkbox en seleccionesPorPagina
+        if (!seleccionesPorPagina[currentPage]) {
+            seleccionesPorPagina[currentPage] = [];
+        }
+        if (isChecked) {
+            seleccionesPorPagina[currentPage].push(numero);
+        } else {
+            var index = seleccionesPorPagina[currentPage].indexOf(numero);
+            if (index !== -1) {
+                seleccionesPorPagina[currentPage].splice(index, 1);
+            }
+        }
+    });
+
     // Guardar el estado de las casillas seleccionadas antes de enviar el formulario
     $('form').submit(function() {
-        $('#seleccionados').val($('input[name="numeros[]"]:checked').map(function() { return this.value; }).get().join(','));
+        // Obtener todas las selecciones de casillas
+        var todasLasSelecciones = [];
+        Object.values(seleccionesPorPagina).forEach(function(selecciones) {
+            todasLasSelecciones = todasLasSelecciones.concat(selecciones);
+        });
+
+        // Establecer el valor del campo oculto con todas las selecciones
+        $('#seleccionados').val(todasLasSelecciones.join(','));
     });
+
+    // Función para obtener el número de página actual
+    function getCurrentPage() {
+        return parseInt($('.page-item.active .page-link').text());
+    }
+
+    // Función para obtener las selecciones de números en la página actual
+    function getCurrentPageSelection() {
+        var currentPage = getCurrentPage();
+        return seleccionesPorPagina[currentPage] || [];
+    }
 });
 
 </script>
