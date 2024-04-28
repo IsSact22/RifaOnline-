@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/logo_ca.png">
     <title>Rifa CAPRES-TSJ</title>
-    
+
 </head>
 <body>
     <div class="container">
@@ -20,9 +20,9 @@
             <p class="custom-P">CAPRESTSJ, te invita participar en el primer sorteo, donde ganarás fabulosos premios:</p>
             <p class="custom-P">
                <ul class="custom-P " >
-               • 1er Premio: Un televisor 50” + XXX+XXX <br>
-               • 2do Premio: XXX+XXX+XXX <br>
-               • 3er Premio: XXX + XXX + XXX
+               • 1er Premio: Televisor HYUNDAI de 55. + Cafetera Acci 12tazas. + Licuadora DAEWOO. + 50 Recipientes para Comida<br>
+               • 2do Premio: Freidora de Aire Bremen. + Ayudante de Cocina Oster. + Juego de Cuchillos Cutlery. <br>
+               • 3er Premio: Batidora de mano DAEWOO. + Planca Antiadherente.Horno + Microondas HYUNDAI
                </ul>
             </p>
             <p  class="custom-P "><b>EL SORTEO SE REALIZARÁ EL DÍA 10 DE MAYO DE 2024, POR LA LOTERIA </b></p>
@@ -31,7 +31,7 @@
                 <ul>
                     • Costo por acción Bs.80 <br>
                     • Los boletos no cobrados, NO PARTICIPAN. <br>
-                    •Acepta que el monto total de los números adquiridos, sera debitado de su cuenta bancaria del Banco de Venezuela la segunda quincena de abril (30/04/2024). 
+                    •Acepta que el monto total de los números adquiridos, sera debitado de su cuenta bancaria del Banco de Venezuela la segunda quincena de abril (30/04/2024).
                 </ul>
             </p>
 
@@ -42,46 +42,48 @@
                         <?php
                             include 'conexion.php';
                             ?>
-            
-            <form action="procesar.php" method="post">
-            
+
+        <form id="formulario" action="procesar.php" method="post" onsubmit="enviarFormulario()">    
+
             <div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="nombre" class="custom-label">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" class="custom-input" required placeholder="Ingrese su nombre">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="apellido" class="custom-label">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" class="custom-input" required placeholder="Ingrese su apellido">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="cedula" class="custom-label">Cédula:</label>
-            <input type="text" id="cedula" name="cedula" class="custom-input" pattern="[0-8]+" title="Ingrese solo números" required placeholder="Ingresar 8 dígitos">
-                <ul class="CLU">
-                    <li class="CLI">
-                        <div class="conts">
-                            <h3>Nota:</h3>
-                            <p>Debera completar esta casilla con 8 digitos, si su cedula es de 7 digitos 
-                            por favor incluir un cero (0) al principio de la cedula </p>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="nombre" class="custom-label">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" class="custom-input" required placeholder="Ingrese su nombre">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="apellido" class="custom-label">Apellido:</label>
+                        <input type="text" id="apellido" name="apellido" class="custom-input" required placeholder="Ingrese su apellido">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cedula" class="custom-label">Cédula:</label>
+                        <input type="text" id="cedula" name="cedula" class="custom-input"  title="Ingrese solo números" required placeholder="Ingresar 8 dígitos">
+                        
+                            <ul class="CLU">
+                                <li class="CLI">
+                                    <div class="conts">
+                                        <h3>Nota:</h3>
+                                            <p> Debe ser asociado activo en la Caja de ahorros, si es activo y
+                                                no le permite realizar la solicitud comunicarse con el personal encargado.Llamar a la EXT.9456</p>
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <h4><B>Nota:</B></h4>
+            <p></p>
 
-                        </div>
-                    </li>
-                </ul>
-        </div>
-    </div>
-</div>
 
 
 
 
-
-            
-                <p><a href="mostrar_participantes.php">Ver participantes registrados</a></p>
+                <!-- <p><a href="mostrar_participantes.php">Ver participantes registrados</a></p> -->
                 <hr>
                 <input type="hidden" name="seleccionados" id="seleccionados" value="<?php echo implode(',', $_POST['numeros'] ?? []); ?>">
 
@@ -131,6 +133,9 @@
 
                                 </tr>
                         </table>
+
+                        <input type="hidden" id="seleccionados_todos" name="seleccionados_todos" value="">
+
                         <!-- Controles de paginación -->
                         <?php
                             // Calcular la cantidad total de páginas
@@ -160,15 +165,15 @@
                             <?php endif; ?> -->
                         </ul>
                     </nav>
-
+                    
                 <input type="submit" value="Enviar" class="custom-button">
                 <hr>
-                            
+
             </form>
-            
+
         </div>
     </div>
-    
+
     <!-- Modales -->
     <!-- Modal de registro exitoso -->
     <div class="modal fade" id="registroExitosoModal" tabindex="-1" aria-labelledby="registroExitosoModalLabel" aria-hidden="true">
@@ -180,7 +185,7 @@
                 </div>
                 <div class="modal-body">
                     <b> ¡Hola,  <?php echo isset($_GET['nombre_completo']) ? strtoupper($_GET['nombre_completo']) : 'PARTICIPANTE'; ?>! <br></b>
-                    <b><?php echo "Números seleccionados: " . $_GET['numeros_seleccionados']; ?></b> <br>   
+                    <b><?php echo "Números seleccionados: " . $_GET['numeros_seleccionados']; ?></b> <br>
                         <p>Por favor imprimir el comprobante antes de cerrar esta pestaña</p>
                 </div>
                 <div class="modal-footer">
@@ -191,24 +196,25 @@
         </div>
     </div>
 
-    <!-- Modal de alerta de duplicado -->
-    <div class="modal fade" id="duplicadoModal" tabindex="-1" aria-labelledby="duplicadoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="duplicadoModalLabel">Registro Duplicado</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¡Ya estás registrado!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-                </div>
+<!-- Modal de error de cédula -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error de Cédula</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">Su cédula no está registrada como personal activo. Por favor, verifique su número de cédula.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
             </div>
         </div>
     </div>
-    
+</div>
+
+
     <!-- Modal de alerta de selección de números -->
     <div class="modal fade" id="noNumbersModal" tabindex="-1" aria-labelledby="noNumbersModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -232,7 +238,7 @@
     <!-- Bootstrap Bundle JS  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Script para mostrar la alerta de registro exitoso o de duplicado -->
+<!-- Script para mostrar la alerta de registro exitoso o de cédula no registrada -->
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -244,8 +250,8 @@
             // Limpiar el parámetro de éxito de la URL
             urlParams.delete('success');
             history.replaceState(null, null, window.location.pathname + '?' + urlParams.toString());
-        } else if (errorParam === 'duplicate') {
-            $('#duplicadoModal').modal('show');
+        } else if (errorParam === 'cedula_no_registrada') {
+            $('#errorModal').modal('show');
             // Limpiar el parámetro de error de la URL
             urlParams.delete('error');
             history.replaceState(null, null, window.location.pathname + '?' + urlParams.toString());
@@ -375,9 +381,46 @@ $(document).ready(function() {
 });
 
 </script>
+<script>
+// Función para manejar el cambio de estado de los checkboxes de números (evento delegado)
+$(document).on('change', 'input[name="numeros[]"]:checkbox', function() {
+    // Actualizar el campo oculto con todas las selecciones
+    var todasLasSelecciones = $('input[name="numeros[]"]:checked').map(function() {
+        return this.value;
+    }).get().join(',');
+    $('#seleccionados').val(todasLasSelecciones);
+});
+
+</script>
+<!-- PRUEBA DE SELECCION MULTIPLE  -->
+<!-- PRUEBA DE SELECCION MULTIPLE  -->
+<script>
+// Función para manejar el envío del formulario
+function enviarFormulario() {
+    // Obtener todos los checkboxes de números seleccionados
+    var checkboxes = document.querySelectorAll('.checkbox-numero');
+    // Arreglo para almacenar los números seleccionados
+    var numerosSeleccionados = [];
+    
+    // Iterar sobre cada checkbox
+    checkboxes.forEach(function(checkbox) {
+        // Verificar si el checkbox está marcado
+        if (checkbox.checked) {
+            // Agregar el valor del checkbox (el número seleccionado) al arreglo
+            numerosSeleccionados.push(checkbox.value);
+        }
+    });
+    
+    // Asignar los números seleccionados al campo oculto del formulario
+    document.getElementById('seleccionados_todos').value = numerosSeleccionados.join(',');
+    
+    // Enviar el formulario
+    document.getElementById('formulario').submit();
+}
+</script>
 
 
 
-   
+
 </body>
 </html>
