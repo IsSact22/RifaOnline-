@@ -112,10 +112,10 @@ table td input[type="checkbox"] {
         --bs-pagination-hover-border-color: var(--bs-border-color);
         --bs-pagination-focus-color: var(--bs-link-hover-color);
         --bs-pagination-focus-bg: var(--bs-secondary-bg);
-        --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgb(4, 0, 238);
         --bs-pagination-active-color: #fff;
-        --bs-pagination-active-bg: #0d6efd;
-        --bs-pagination-active-border-color: #0d6efd;
+        --bs-pagination-active-bg: #08140d;
+        --bs-pagination-active-border-color: #ffffff;
         --bs-pagination-disabled-color: var(--bs-secondary-color);
         --bs-pagination-disabled-bg: var(--bs-secondary-bg);
         --bs-pagination-disabled-border-color: var(--bs-border-color);
@@ -162,8 +162,8 @@ table td input[type="checkbox"] {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #0a0a0a;
+    border-radius: 20px;
 }
 
 /* Estilos personalizados para las etiquetas de los campos */
@@ -250,30 +250,19 @@ table td input[type="checkbox"] {
     background-color: #0056b3;
 }
 
-.CLU .CLI{
-   position: relative;
-   list-style: none;
-   width: 20px;
-   height: 20px;
-   background: #727070;
-   margin: 0 166px; 
-   border-radius: 50%;
-   transition: 0.5s;
-   cursor: pointer;
+/* Estilo para el tooltip */
+.CLU .CLI {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
 }
-.CLU .CLI:hover{
-    background: #0026ff;
-    box-shadow: 0 0 0 4px #ffffff,
-                0 0 0 6px #0026ff;
 
-
-}
-.CLU .CLI .conts{
+.CLU .CLI .tooltip-content {
     position: absolute;
     bottom: 55px;
     width: 400px;
     background: #fffbfb;
-    border: 2px solid black;
+    border: 2px solid rgba(109, 92, 92, 0);
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
@@ -283,7 +272,7 @@ table td input[type="checkbox"] {
     transform: translateX(-50%) translateY(-50px);
 }
 
-.CLU .CLI .conts::before{
+.CLU .CLI .tooltip-content::before {
     content: '';
     position: absolute;
     width: 30px;
@@ -292,15 +281,33 @@ table td input[type="checkbox"] {
     bottom: -15px;
     left: 194px;
     transform: rotate(45deg);
-
-
 }
-.CLU .CLI:hover .conts{
+
+.CLU .CLI:hover .tooltip-content {
     visibility: visible;
     opacity: 1;
     transform: translateX(-50%) translateY(0px);
 }
-.CLU .CLI .conts h2{
-    margin: 0;
-    padding: 0;
+
+.tooltip-text {
+    color: #000000;
+    text-decoration: auto;
+    border: 1px solid #020c18cb;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: rgb(25 131 243 / 51%);
+}
+
+.tooltip-text:hover + .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+}
+
+
+.active>.page-link-coumbre, .page-link-coumbre.active {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: var(--bs-pagination-active-bg);
+    border-color: var(--bs-pagination-active-border-color);
 }

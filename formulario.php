@@ -14,15 +14,16 @@
 </head>
 <body>
     <div class="container">
-    <img src="img/Banner2015_2.jpg  " alt="Banner" class="full-width-img">
+    <img src="img/Banner2015_2.jpg  " alt="Banner" class="full-width-img">  
+    <hr>
     <h2 class="custom-title">RIFA DIA DE LAS MADRES</h2>
         <br>
             <p class="custom-P">CAPRESTSJ, te invita participar en el primer sorteo, donde ganarás fabulosos premios:</p>
             <p class="custom-P">
                <ul class="custom-P " >
-               • 1er Premio: Televisor HYUNDAI de 55. + Cafetera Acci 12tazas. + Licuadora DAEWOO. + 50 Recipientes para Comida<br>
-               • 2do Premio: Freidora de Aire Bremen. + Ayudante de Cocina Oster. + Juego de Cuchillos Cutlery. <br>
-               • 3er Premio: Batidora de mano DAEWOO. + Planca Antiadherente.Horno + Microondas HYUNDAI
+               • <b>1er Premio:</b> TV HYUNDAI de 55. + Cafetera Acci 12 tazas. + Licuadora DAEWOO. + Set de Envases Rubbermaind.<br>
+               • <b>2do Premio:</b> Batidora de mano DAEWOO. + Plancha Oster +  Horno Microondas HYUNDAI
+               • <b>3er Premio:</b> Freidora de Aire Bremen. + Batidora de Inmersión Oster + Juego de Cuchillos Cutlery. <br>
                </ul>
             </p>
             <p  class="custom-P "><b>EL SORTEO SE REALIZARÁ EL DÍA 10 DE MAYO DE 2024, POR LA LOTERIA </b></p>
@@ -63,25 +64,28 @@
                         <label for="cedula" class="custom-label">Cédula:</label>
                         <input type="text" id="cedula" name="cedula" class="custom-input"  title="Ingrese solo números" required placeholder="Ingresar 8 dígitos">
                         
-                            <ul class="CLU">
-                                <li class="CLI">
-                                    <div class="conts">
-                                        <h3>Nota:</h3>
-                                            <p> Debe ser asociado activo en la Caja de ahorros, si es activo y
-                                                no le permite realizar la solicitud comunicarse con el personal encargado.Llamar a la EXT.9456</p>
-                                        
-                                    </div>
-                                </li>
-                            </ul>
+                        <ul class="CLU">
+                            <li class="CLI"> 
+                                <span class="tooltip-text">Más información</span>
+                                <div class="conts tooltip-content">
+                                    <h3>Nota:</h3>
+                                    <p>Debe ser asociado activo en la Caja de ahorros, si es activo y no le permite realizar la solicitud comunicarse con el personal encargado. Llamar a la EXT.9456</p>
+                                </div>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
             <h4><B>Nota:</B></h4>
-            <p></p>
-
-
-
-
+            <p class="custom-P ">
+                <ul>
+                • Deberá rellenar todos los datos se solicite para poder finalizar su registro. <br>
+                • Debe ser personal activo en CAPRESTSJ. <br>
+                • Para poder registrar los numeros a su selección, tendra que realizar un registro por cada pagina. <br>
+                • Una vez verifico que sus numeros son correcto debera imprimir su comprobante de sus "Registro Exitoso" por cada registro que usted tenga registrado. <br>
+                </ul>
+            </p>
 
                 <!-- <p><a href="mostrar_participantes.php">Ver participantes registrados</a></p> -->
                 <hr>
@@ -140,7 +144,7 @@
                         <?php
                             // Calcular la cantidad total de páginas
                             $totalPages = ceil(count($numeros_disponibles) / $numbersPerPage);
-                        ?>
+                        ?> 
                     </div>
 
 
@@ -154,7 +158,9 @@
                                 </li>
                             <?php endif; ?>
                             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
                             <?php endfor; ?>
                             <!-- <?php if ($currentPage < $totalPages): ?>
                                 <li class="page-item">
@@ -162,9 +168,10 @@
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
-                            <?php endif; ?> -->
+                            <?php endif; ?>  -->
                         </ul>
                     </nav>
+
                     
                 <input type="submit" value="Enviar" class="custom-button">
                 <hr>
@@ -418,6 +425,8 @@ function enviarFormulario() {
     document.getElementById('formulario').submit();
 }
 </script>
+
+
 
 
 
