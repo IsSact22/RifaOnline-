@@ -1,0 +1,103 @@
+* {
+    box-sizing : border-box;
+    font-family: 'Inconsolata', monospace;
+    user-select: none;
+}
+
+/** Estilo del encabezado */
+.header {
+    color     : #333;
+    text-align: center;
+}
+
+.header__container {
+    max-width: 80%;
+    margin   : 0 auto;
+}
+
+.header__titulo {
+    font-size: 1.5rem;
+}
+
+/** Estilo de la sección de contenido */
+.main {
+    display              : grid;
+    place-content        : center;
+    grid-template-columns: repeat(2, 1fr);
+    gap                  : 3px;
+    padding              : 2rem 0;
+}
+
+/** Tamaño del contenedor de la imagen */
+.contenido {
+    display    : grid;
+    place-items: center;
+    height     : auto;
+    width      : 100%;
+    height     : 100%;
+}
+
+/** Tamaño de la imagen */
+.contenido__img--espanta {
+    width     : 71%;
+    height    : 100%;
+    object-fit: cover;
+}
+
+/** Estilo de la sección principal */
+.section {
+    background-color: #f5f5f5;
+    text-align      : center;
+
+}
+
+.section__texto {
+    max-width: 80%;
+    margin   : 0 auto;
+}
+
+.section__texto--titulo {
+    font-size    : 2rem;
+    margin-bottom: 1rem;
+}
+
+.section__texto--parrafo {
+    font-size    : 1rem;
+    line-height  : 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Estilo de los botones */
+.section__botones {
+    color  : #fff;
+    padding: 1rem 0;
+}
+
+.section__botones--contenido {
+    max-width: 80%;
+    margin   : 0 auto;
+}
+
+.section__botones--contenido__btn {
+    background-color: #ff3c00;
+    color           : #fff;
+    border          : none;
+    padding         : 1rem 2rem;
+    font-size       : 1rem;
+    font-weight     : 900;
+    cursor          : pointer;
+    transition      : all 0.3s ease;
+}
+
+.section__botones--contenido__btn:hover {
+    background-color: hsl(250, 36%, 16%);
+    color           : #fff;
+    scale           : 1.1;
+}
+
+/* Estilo para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+}

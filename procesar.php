@@ -1,9 +1,5 @@
 <?php
 // procesar.php
-
-// Iniciar la sesión
-session_start();
-
 include 'conexion.php';
 
 // Obtener datos del formulario

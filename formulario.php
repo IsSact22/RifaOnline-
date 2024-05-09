@@ -14,25 +14,31 @@
 </head>
 <body>
     <div class="container">
-    <img src="img/Banner2015_2.jpg  " alt="Banner" class="full-width-img">  
+    <img src="img/Banner2015_2.jpg  " alt="Banner" class="full-width-img">
     <hr>
-    <h2 class="custom-title">RIFA DIA DE LAS MADRES</h2>
+    <h2 class="custom-title">RIFA MES DE LAS MADRES</h2>
         <br>
-            <p class="custom-P">CAPRESTSJ, te invita participar en el primer sorteo, donde ganarás fabulosos premios:</p>
+            <p class="custom-P">CAPRESTSJ, te invita participar en el 1er. Sorteo dónde ganarás  fabulosos premios.</p>
+              <p class="custom-P"><b>SORTEO</b> 01/06/2024<b> 7:00PM</b><br>
+              LOTERIA <b>CHANCE TRIPLE A-B-ASTRAL</b>
+              
+              
+              </p>
+               
             <p class="custom-P">
                <ul class="custom-P " >
-               • <b>1er Premio:</b> TV HYUNDAI de 55. + Cafetera Acci 12 tazas. + Licuadora DAEWOO. + Set de Envases Rubbermaind.<br>
-               • <b>2do Premio:</b> Batidora de mano DAEWOO. + Plancha Oster +  Horno Microondas HYUNDAI
-               • <b>3er Premio:</b> Freidora de Aire Bremen. + Batidora de Inmersión Oster + Juego de Cuchillos Cutlery. <br>
+                • <b>1er Premio:</b> TV HYUNDAI de 50 + Cafetera Acci 12 tazas + Licuadora DAEWOO + Set de Envases Rubbermaind.<br>
+               • <b>2do Premio:</b> Horno Microondas HYUNDAI + Batidora de mano DAEWOO + Plancha Oster. <br>
+               • <b>3er Premio:</b> Freidora de Aire Bremen + Batidora de Inmersión Oster + Juego de Cuchillos Cutlery. 
                </ul>
             </p>
-            <p  class="custom-P "><b>EL SORTEO SE REALIZARÁ EL DÍA 10 DE MAYO DE 2024, POR LA LOTERIA </b></p>
             <p><b>Condiciones</b> </p>
             <p>
                 <ul>
                     • Costo por acción Bs.80 <br>
-                    • Los boletos no cobrados, NO PARTICIPAN. <br>
-                    •Acepta que el monto total de los números adquiridos, sera debitado de su cuenta bancaria del Banco de Venezuela la segunda quincena de abril (30/04/2024).
+                    •Participan solo asociados de CAPRESTSJ.<br>
+                    • El monto total de los números adquiridos, serán debitado de sus cuentas bancarias del Banco de Venezuela la 1ra. o 2da. Quincena de Mayo.<br>
+                    • Los boletos no cobrados,<b> NO PARTICIPAN. </b>
                 </ul>
             </p>
 
@@ -44,7 +50,7 @@
                             include 'conexion.php';
                             ?>
 
-        <form id="formulario" action="procesar.php" method="post" onsubmit="enviarFormulario()">    
+        <form id="formulario" action="procesar.php" method="post">    
 
             <div class="row">
                 <div class="col-md-4">
@@ -62,9 +68,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cedula" class="custom-label">Cédula:</label>
-                        <input type="text" id="cedula" name="cedula" class="custom-input"  title="Ingrese solo números" required placeholder="Ingresar 8 dígitos">
-                        
-                        <ul class="CLU">
+                        <input type="text" id="cedula" name="cedula" class="custom-input"  title="Ingrese solo números" required placeholder="Ingresar Máximo 8 dígitos">
+                           <ul class="CLU">
                             <li class="CLI"> 
                                 <span class="tooltip-text">Más información</span>
                                 <div class="conts tooltip-content">
@@ -77,17 +82,21 @@
                     </div>
                 </div>
             </div>
-            <h4><B>Nota:</B></h4>
+            <div>
+
+                <a href="consulta.php" class="custom-buttone">Ver participantes registrados</a>
+            </div>
+            <br>
+            <h4><B>Instrucciones:</B></h4>
             <p class="custom-P ">
                 <ul>
-                • Deberá rellenar todos los datos se solicite para poder finalizar su registro. <br>
-                • Debe ser personal activo en CAPRESTSJ. <br>
-                • Para poder registrar los numeros a su selección, tendra que realizar un registro por cada pagina. <br>
-                • Una vez verifico que sus numeros son correcto debera imprimir su comprobante de sus "Registro Exitoso" por cada registro que usted tenga registrado. <br>
+                • Deberá completar todos los datos solicitados para que su registro sea exitoso.<br>
+                • Una vez seleccionado el/los números y envíar, deberá imprimir su comprobante o hacer un capture de la pantalla "registro Exitoso".<br>
+                • Deberá ingresar las veces que sea necesario, si su elección de número implica moverse de <b>PÁGINA</b>.<br>
+                
                 </ul>
             </p>
 
-                <!-- <p><a href="mostrar_participantes.php">Ver participantes registrados</a></p> -->
                 <hr>
                 <input type="hidden" name="seleccionados" id="seleccionados" value="<?php echo implode(',', $_POST['numeros'] ?? []); ?>">
 
@@ -144,7 +153,7 @@
                         <?php
                             // Calcular la cantidad total de páginas
                             $totalPages = ceil(count($numeros_disponibles) / $numbersPerPage);
-                        ?> 
+                        ?>
                     </div>
 
 
@@ -158,9 +167,7 @@
                                 </li>
                             <?php endif; ?>
                             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>">
-                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
+                                <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
                             <!-- <?php if ($currentPage < $totalPages): ?>
                                 <li class="page-item">
@@ -168,10 +175,9 @@
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
-                            <?php endif; ?>  -->
+                            <?php endif; ?> -->
                         </ul>
                     </nav>
-
                     
                 <input type="submit" value="Enviar" class="custom-button">
                 <hr>
@@ -399,34 +405,6 @@ $(document).on('change', 'input[name="numeros[]"]:checkbox', function() {
 });
 
 </script>
-<!-- PRUEBA DE SELECCION MULTIPLE  -->
-<!-- PRUEBA DE SELECCION MULTIPLE  -->
-<script>
-// Función para manejar el envío del formulario
-function enviarFormulario() {
-    // Obtener todos los checkboxes de números seleccionados
-    var checkboxes = document.querySelectorAll('.checkbox-numero');
-    // Arreglo para almacenar los números seleccionados
-    var numerosSeleccionados = [];
-    
-    // Iterar sobre cada checkbox
-    checkboxes.forEach(function(checkbox) {
-        // Verificar si el checkbox está marcado
-        if (checkbox.checked) {
-            // Agregar el valor del checkbox (el número seleccionado) al arreglo
-            numerosSeleccionados.push(checkbox.value);
-        }
-    });
-    
-    // Asignar los números seleccionados al campo oculto del formulario
-    document.getElementById('seleccionados_todos').value = numerosSeleccionados.join(',');
-    
-    // Enviar el formulario
-    document.getElementById('formulario').submit();
-}
-</script>
-
-
 
 
 

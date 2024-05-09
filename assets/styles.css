@@ -112,10 +112,10 @@ table td input[type="checkbox"] {
         --bs-pagination-hover-border-color: var(--bs-border-color);
         --bs-pagination-focus-color: var(--bs-link-hover-color);
         --bs-pagination-focus-bg: var(--bs-secondary-bg);
-        --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgb(4, 0, 238);
+        --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
         --bs-pagination-active-color: #fff;
-        --bs-pagination-active-bg: #08140d;
-        --bs-pagination-active-border-color: #ffffff;
+        --bs-pagination-active-bg: #0d6efd;
+        --bs-pagination-active-border-color: #0d6efd;
         --bs-pagination-disabled-color: var(--bs-secondary-color);
         --bs-pagination-disabled-bg: var(--bs-secondary-bg);
         --bs-pagination-disabled-border-color: var(--bs-border-color);
@@ -158,6 +158,7 @@ table td input[type="checkbox"] {
 }
 
 /* Estilos personalizados para los campos de entrada */
+/* Estilos personalizados para los campos de entrada */
 .custom-input {
     width: 100%;
     padding: 10px;
@@ -185,7 +186,34 @@ table td input[type="checkbox"] {
     text-align: center;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.623);
 }
-
+.custom-buttone {
+    display: unset;
+    width: 100%;
+    padding: 10px;
+    background-color: #05afbb;
+    color: #fff;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(4, 3, 7, 0.466);
+    text-decoration: auto;
+}
+.buttone {
+    display: unset;
+    width: 100%;
+    padding: 10px;
+    background-color: #05afbb;
+    color: #fff;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(4, 3, 7, 0.466);
+    text-decoration: auto;
+}
 /* Estilos personalizados para el enlace "Ver participantes registrados" */
 .custom-link {
     text-align: center;
@@ -302,12 +330,4 @@ table td input[type="checkbox"] {
     visibility: visible;
     opacity: 1;
     transform: translateX(-50%) translateY(0px);
-}
-
-
-.active>.page-link-coumbre, .page-link-coumbre.active {
-    z-index: 3;
-    color: var(--bs-pagination-active-color);
-    background-color: var(--bs-pagination-active-bg);
-    border-color: var(--bs-pagination-active-border-color);
 }

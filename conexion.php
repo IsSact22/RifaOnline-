@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "rifa";
+$dbname = "sorteo";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
